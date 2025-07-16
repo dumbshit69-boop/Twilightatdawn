@@ -77,7 +77,12 @@
 
   <script>
     function showSpider() {
-      document.getElementById('spiderImage').style.display = 'block';
+      const spider = document.getElementById('spiderImage');
+      spider.style.display = 'block';
+
+      setTimeout(() => {
+        spider.style.display = 'none';
+      }, 1500); // disappears after 1.5 seconds
     }
   </script>
 </body>
