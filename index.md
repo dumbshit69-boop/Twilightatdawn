@@ -14,6 +14,5 @@ title: Welcome
 ---
 
 <small style="color: gray;">
-&copy; 2025 Haniya Gardezi.  
-Still figuring it all out — but at least the website slaps.
+
 </small>
