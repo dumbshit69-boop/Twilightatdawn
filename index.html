@@ -3,9 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <title>Spiders</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at center, #0d0d0d 0%, #000000 100%);
+      color: #e0e0e0;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 4rem;
+      animation: glitch 2s infinite;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #8b0000;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff0000;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 2px red; }
+      25% { text-shadow: -2px -2px lime; }
+      50% { text-shadow: 2px -2px cyan; }
+      75% { text-shadow: -2px 2px yellow; }
+      100% { text-shadow: 2px 2px red; }
+    }
+  </style>
 </head>
 <body>
   <h1>🕷️ Spiders 🕷️</h1>
   <p>They’re quiet. They’re patient. They’re everywhere.</p>
+  <button onclick="alert('I told you not to 😤🕸️')">Don’t Click This</button>
 </body>
 </html>
