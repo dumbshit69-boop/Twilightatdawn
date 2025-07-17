@@ -2,51 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Spidery Poem</title>
   <style>
     body {
-      background-color: #0a0a0a;
-      color: #e0e0e0;
+      background: #000;
+      color: #f5f5f5;
       font-family: 'Courier New', monospace;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      flex-direction: column;
+      overflow: hidden;
+      position: relative;
     }
 
     #poem {
       white-space: pre-wrap;
-      border-right: 2px solid #e0e0e0;
-      font-size: 1.2rem;
+      font-size: 1rem;
       max-width: 600px;
-      min-height: 250px;
+      line-height: 1.6;
+      text-align: left;
+      z-index: 1;
     }
 
     button {
-      margin-top: 40px;
-      background-color: #1a1a1a;
-      color: #e0e0e0;
-      border: 1px solid #e0e0e0;
-      padding: 10px 20px;
+      margin-top: 20px;
+      padding: 8px 16px;
+      background: transparent;
+      color: #f5f5f5;
+      border: 1px solid #f5f5f5;
       font-family: inherit;
       cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #2c2c2c;
+      z-index: 2;
     }
 
     .hidden {
       display: none;
     }
 
-    .fade-out {
-      opacity: 0;
-      transition: opacity 2s ease;
+    .spider {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Spider_icon.svg/32px-Spider_icon.svg.png') no-repeat center;
+      background-size: contain;
+      animation: float 10s infinite linear;
+      opacity: 0.2;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(-50px); }
+      100% { transform: translateY(110vh); }
     }
   </style>
 </head>
@@ -55,8 +63,15 @@
   <div id="poem" class="hidden"></div>
   <button id="start">Begin</button>
 
+  <!-- Spiders floating down -->
+  <div class="spider" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="spider" style="left: 25%; animation-delay: 2s;"></div>
+  <div class="spider" style="left: 45%; animation-delay: 3s;"></div>
+  <div class="spider" style="left: 65%; animation-delay: 1s;"></div>
+  <div class="spider" style="left: 85%; animation-delay: 4s;"></div>
+
   <script>
-    const poem = `There’s a spider in my skull
+    const poemText = `There’s a spider in my skull
 spinning
 Threading my thoughts 
 into every corner of my brain 
@@ -66,36 +81,49 @@ without any breaks
 making webs out of things
 I never said
 
-I brush him off in the mornings,
+I brush him  off in the mornings,
 wipe her legs from my thoughts
 but by the night 
 he’s building again
 hungrier day by day 
 
-I scream`;
+I scream and beg every time 
+but he doesn't listen 
+he likes it
 
-    const poemElement = document.getElementById('poem');
+The things I try to forget 
+Are in every thread.
+And when I try to tear it down
+I bleed
+Every damn time
+
+Still he is there .
+And I let him stay 
+Still 
+I leave the lights on`;
+
+    const poemDiv = document.getElementById('poem');
     const button = document.getElementById('start');
 
-    function typePoem(text, element, delay = 50) {
+    function typePoem(text, element, speed = 45) {
       let i = 0;
       element.textContent = '';
-      const typing = setInterval(() => {
-        element.textContent += text[i];
+      const interval = setInterval(() => {
+        element.textContent += text.charAt(i);
         i++;
         if (i >= text.length) {
-          clearInterval(typing);
+          clearInterval(interval);
           setTimeout(() => {
-            element.classList.add('fade-out');
-          }, 10000); // wait 10 seconds after full display
+            element.classList.add('hidden');
+          }, 10000); // Disappear 10s after full poem
         }
-      }, delay);
+      }, speed);
     }
 
     button.addEventListener('click', () => {
       button.classList.add('hidden');
-      poemElement.classList.remove('hidden');
-      typePoem(poem, poemElement);
+      poemDiv.classList.remove('hidden');
+      typePoem(poemText, poemDiv);
     });
   </script>
 
